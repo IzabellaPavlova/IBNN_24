@@ -2,6 +2,9 @@ package org.ibmm.ibmm24.controller;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import java.time.LocalDateTime;
+
 import org.ibmm.ibmm24.dto.request.CreateOffersInput;
 import org.ibmm.ibmm24.dto.request.OfferQueryInput;
 import org.ibmm.ibmm24.dto.response.CreateOffersOutput;
@@ -9,6 +12,7 @@ import org.ibmm.ibmm24.dto.response.OfferQueryOutput;
 import org.ibmm.ibmm24.service.CreateOffersService;
 import org.ibmm.ibmm24.service.EngineLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +27,46 @@ public class EngineApiController {
     @Autowired
     EngineLogicService engineLogicService;
 
+    // @GetMapping("/api/offers")
+    // ResponseEntity<OfferQueryOutput> readOffers(@Valid @ModelAttribute OfferQueryInput input) {
+    //     log.info(input.toString());
+    //     OfferQueryOutput output = engineLogicService.filterAndAggregateOrders(input);
+    //     return new ResponseEntity<>(output, HttpStatus.OK);
+    // }
+
     @GetMapping("/api/offers")
-    ResponseEntity<OfferQueryOutput> readOffers(@Valid @ModelAttribute OfferQueryInput input) {
+    ResponseEntity<OfferQueryOutput> readOffers(
+        @RequestParam("regionID") Integer regionID,
+        @RequestParam("timeRangeStart") Long timeRangeStart,
+        @RequestParam("timeRangeEnd") Long timeRangeEnd,
+        @RequestParam("numberDays") Integer numberDays,
+        @RequestParam("sortOrder") String sortOrder,
+        @RequestParam("page") Long page,
+        @RequestParam("pageSize") Long pageSize,
+        @RequestParam("priceRangeWidth") Long priceRangeWidth,
+        @RequestParam("minFreeKilometerWidth") Long minFreeKilometerWidth,
+        @RequestParam(value = "minNumberSeats", required = false) Integer minNumberSeats,
+        @RequestParam(value = "minPrice", required = false) Integer minPrice,
+        @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
+        @RequestParam(value = "carType", required = false) String carType,
+        @RequestParam(value = "onlyVollkasko", required = false) Boolean onlyVollkasko
+    ) {
+        OfferQueryInput input = new OfferQueryInput();
+        input.setRegionID(regionID);
+        input.setTimeRangeStart(timeRangeStart);
+        input.setTimeRangeEnd(timeRangeEnd);
+        input.setNumberDays(numberDays);
+        input.setSortOrder(sortOrder);
+        input.setPage(page);
+        input.setPageSize(pageSize);
+        input.setPriceRangeWidth(priceRangeWidth);
+        input.setMinFreeKilometerWidth(minFreeKilometerWidth);
+        input.setMinNumberSeats(minNumberSeats);
+        input.setMinPrice(minPrice);
+        input.setMaxPrice(maxPrice);
+        input.setCarType(carType);
+        input.setOnlyVollkasko(onlyVollkasko);
+
         log.info(input.toString());
         OfferQueryOutput output = engineLogicService.filterAndAggregateOrders(input);
         return new ResponseEntity<>(output, HttpStatus.OK);
