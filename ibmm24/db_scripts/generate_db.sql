@@ -13,10 +13,9 @@ CREATE TABLE regions (
 );
 
 -- Create offers table
-CREATE TABLE Offers (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE offers (
+    id String PRIMARY KEY,
     most_specific_region SERIAL NOT NULL REFERENCES Regions(id) ON DELETE CASCADE,
-    data VARCHAR(255) NOT NULL,
     start_date BIGINT NOT NULL,
     end_date BIGINT NOT NULL,
     number_seats INT NOT NULL,
