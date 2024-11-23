@@ -34,3 +34,6 @@ build/
 
 ### Server logs ###
 server_logs/
+
+### env file ###
+.env
