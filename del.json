@@ -1,0 +1,90 @@
+{
+    "offers": [
+        {
+            "ID": "99934a57-7988-7879-bb9b-e03bd4e77b9a",
+            "data": "high-performance sports car"
+        },
+        {
+            "ID": "cc934a57-7988-7879-bb9b-e03bd4e77b9d",
+            "data": "spacious luxury SUV"
+        },
+        {
+            "ID": "bb934a57-7988-7879-bb9b-e03bd4e77b9c",
+            "data": "pickup truck for heavy-duty needs"
+        },
+        {
+            "ID": "77934a57-7988-7879-bb9b-e03bd4e77b9e",
+            "data": "luxury sedan with premium features"
+        },
+        {
+            "ID": "88934a57-7988-7879-bb9b-e03bd4e77b9f",
+            "data": "family SUV with safety features"
+        },
+        {
+            "ID": "66934a57-7988-7879-bb9b-e03bd4e77b9d",
+            "data": "sporty coupe, for the adventurous driver"
+        }
+    ],
+    "priceRanges": [
+        {
+            "start": 10000,
+            "end": 20000,
+            "count": 2
+        },
+        {
+            "start": 20000,
+            "end": 30000,
+            "count": 3
+        },
+        {
+            "start": 30000,
+            "end": 40000,
+            "count": 1
+        }
+    ],
+    "carTypeCounts": {
+        "family": 1,
+        "luxury": 2,
+        "sports": 3
+    },
+    "seatsCount": [
+        {
+            "numberSeats": 2,
+            "count": 3
+        },
+        {
+            "numberSeats": 5,
+            "count": 1
+        },
+        {
+            "numberSeats": 7,
+            "count": 2
+        }
+    ],
+    "freeKilometerRange": [
+        {
+            "start": 100,
+            "end": 150,
+            "count": 1
+        },
+        {
+            "start": 150,
+            "end": 200,
+            "count": 2
+        },
+        {
+            "start": 200,
+            "end": 250,
+            "count": 2
+        },
+        {
+            "start": 300,
+            "end": 350,
+            "count": 1
+        }
+    ],
+    "vollkaskoCount": {
+        "trueCount": 6,
+        "falseCount": 3
+    }
+}
