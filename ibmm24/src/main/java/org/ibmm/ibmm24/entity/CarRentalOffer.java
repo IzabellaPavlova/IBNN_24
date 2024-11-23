@@ -1,38 +1,38 @@
 package org.ibmm.ibmm24.entity;
 
 import jakarta.persistence.*;
-
-import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Entity
-@Table(name = "car_rental_offers")  // Specify the table name in the database
+@Table(name = "offers")
 public class CarRentalOffer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "offer_id", nullable = false)
-    private String offerID;
+    private UUID id; // Corresponds to the UUID primary key
 
-    @Column(name = "region_id", nullable = false)
-    private int regionID;
+    @Column(name = "most_specific_region", nullable = false)
+    private int mostSpecificRegion;
 
-    @Column(name = "car_type", nullable = false)
-    private String carType;
+    @Column(nullable = false, length = 255)
+    private String data;
 
-    @Column(name = "number_days", nullable = false)
-    private int numberDays;
+    @Column(name = "start_date", nullable = false)
+    private long startDate; // Using long for BIGINT
+
+    @Column(name = "end_date", nullable = false)
+    private long endDate; // Using long for BIGINT
+
+    @Column(name = "full_days", nullable = false)
+    private int fullDays; // SERIAL in DB is managed by sequences, we can map to an int
 
     @Column(name = "number_seats", nullable = false)
     private int numberSeats;
 
-    @Column(name = "start_timestamp", nullable = false)
-    private ZonedDateTime startTimestamp;
-
-    @Column(name = "end_timestamp", nullable = false)
-    private ZonedDateTime endTimestamp;
-
-    @Column(name = "price", nullable = false)
+    @Column(nullable = false)
     private int price;
+
+    @Column(name = "car_type", nullable = false, length = 255)
+    private String carType;
 
     @Column(name = "has_vollkasko", nullable = false)
     private boolean hasVollkasko;
@@ -40,37 +40,53 @@ public class CarRentalOffer {
     @Column(name = "free_kilometers", nullable = false)
     private int freeKilometers;
 
-    // Getters and Setters (or use Lombok for automatic generation)
-    public String getOfferID() {
-        return offerID;
+    // Getters and setters for all fields
+    public UUID getId() {
+        return id;
     }
 
-    public void setOfferID(String offerID) {
-        this.offerID = offerID;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    public int getRegionID() {
-        return regionID;
+    public int getMostSpecificRegion() {
+        return mostSpecificRegion;
     }
 
-    public void setRegionID(int regionID) {
-        this.regionID = regionID;
+    public void setMostSpecificRegion(int mostSpecificRegion) {
+        this.mostSpecificRegion = mostSpecificRegion;
     }
 
-    public String getCarType() {
-        return carType;
+    public String getData() {
+        return data;
     }
 
-    public void setCarType(String carType) {
-        this.carType = carType;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public int getNumberDays() {
-        return numberDays;
+    public long getStartDate() {
+        return startDate;
     }
 
-    public void setNumberDays(int numberDays) {
-        this.numberDays = numberDays;
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
+    }
+
+    public long getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getFullDays() {
+        return fullDays;
+    }
+
+    public void setFullDays(int fullDays) {
+        this.fullDays = fullDays;
     }
 
     public int getNumberSeats() {
@@ -81,28 +97,20 @@ public class CarRentalOffer {
         this.numberSeats = numberSeats;
     }
 
-    public ZonedDateTime getStartTimestamp() {
-        return startTimestamp;
-    }
-
-    public void setStartTimestamp(ZonedDateTime startTimestamp) {
-        this.startTimestamp = startTimestamp;
-    }
-
-    public ZonedDateTime getEndTimestamp() {
-        return endTimestamp;
-    }
-
-    public void setEndTimestamp(ZonedDateTime endTimestamp) {
-        this.endTimestamp = endTimestamp;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 
     public boolean isHasVollkasko() {
@@ -119,5 +127,22 @@ public class CarRentalOffer {
 
     public void setFreeKilometers(int freeKilometers) {
         this.freeKilometers = freeKilometers;
+    }
+
+    @Override
+    public String toString() {
+        return "CarRentalOffer{" +
+                "id=" + id +
+                ", mostSpecificRegion=" + mostSpecificRegion +
+                ", data='" + data + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", fullDays=" + fullDays +
+                ", numberSeats=" + numberSeats +
+                ", price=" + price +
+                ", carType='" + carType + '\'' +
+                ", hasVollkasko=" + hasVollkasko +
+                ", freeKilometers=" + freeKilometers +
+                '}';
     }
 }

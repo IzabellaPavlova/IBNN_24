@@ -1,26 +1,6 @@
 version: '3.8'
 
 services:
-  # Spring Boot Application service
-  app:
-    image: matfel/ibmm24-engine
-    container_name: engine
-    build:
-      context: ./ # Assuming Dockerfile is in the same directory as this file
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/enginedb
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=password
-      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
-      - SPRING_JPA_HIBERNATE_DDL-AUTO=none
-      - SPRING_JPA_SHOW-SQL=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT-SQL=true
-    depends_on:
-      - db
-    ports:
-      - "8080:8080" # Exposing Spring Boot app on port 8080
-
-  # PostgreSQL Database service
   db:
     image: postgres:15
     container_name: postgres-db

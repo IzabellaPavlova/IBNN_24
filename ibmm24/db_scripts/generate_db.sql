@@ -14,10 +14,12 @@ CREATE TABLE regions (
 
 -- Create offers table
 CREATE TABLE offers (
-    id String PRIMARY KEY,
+    id UUID PRIMARY KEY,
     most_specific_region SERIAL NOT NULL REFERENCES Regions(id) ON DELETE CASCADE,
+    data VARCHAR(255) NOT NULL,
     start_date BIGINT NOT NULL,
     end_date BIGINT NOT NULL,
+    full_days INT NOT NULL,
     number_seats INT NOT NULL,
     price INT NOT NULL,
     car_type VARCHAR(255) NOT NULL,
@@ -26,9 +28,9 @@ CREATE TABLE offers (
 );
 
 -- Create indexes
-CREATE INDEX path_gist_idx ON regions USING GIST (path);
-CREATE INDEX path_btree_idx ON regions USING BTREE (path);
-CREATE INDEX subregion_idx ON offers(most_specific_region);
+-- CREATE INDEX path_gist_idx ON regions USING GIST (path);
+-- CREATE INDEX path_btree_idx ON regions USING BTREE (path);
+-- CREATE INDEX subregion_idx ON offers(most_specific_region);
 
 -- Insert data
 INSERT INTO regions (id, name, path) VALUES (0, 'European Union', '0');
@@ -158,33 +160,3 @@ INSERT INTO regions (id, name, path) VALUES (56, 'Antwerp Central Station', '0.6
 INSERT INTO regions (id, name, path) VALUES (57, 'Grote Markt', '0.6.20.57');
 
 -- Function to get all offers for a region and its children
-CREATE OR REPLACE FUNCTION get_offers_for_region(region_id INTEGER)
-RETURNS TABLE (offer_id INTEGER) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT o.id
-    FROM offers o
-    JOIN regions r_sub ON o.subregion_id = r_sub.id
-    JOIN regions r_parent ON r_sub.path <@ (
-        SELECT path
-        FROM regions
-        WHERE id = region_id
-    );
-END;
-$$ LANGUAGE plpgsql;
-
--- Function to get full path name for a region
-CREATE OR REPLACE FUNCTION get_region_full_path(region_id INTEGER)
-RETURNS TEXT AS $$
-DECLARE
-    result TEXT;
-BEGIN
-    SELECT string_agg(name, ' > ' ORDER BY nlevel(path))
-    INTO result
-    FROM regions
-    WHERE path @> (SELECT path FROM regions WHERE id = region_id)
-    ORDER BY path;
-
-    RETURN result;
-END;
-$$ LANGUAGE plpgsql;

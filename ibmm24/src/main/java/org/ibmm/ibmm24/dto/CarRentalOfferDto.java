@@ -5,12 +5,12 @@ import java.time.ZonedDateTime;
 public record CarRentalOfferDto(
         String ID,
         String data,
-        String mostSpecificRegionID,
-        String carType,
-        int startDate,
-        int endDate,
+        int mostSpecificRegionID,
+        long startDate,
+        long endDate,
         int numberSeats,
         int price,
+        String carType,
         boolean hasVollkasko,
         int freeKilometers
 ) {}

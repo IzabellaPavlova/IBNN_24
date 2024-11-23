@@ -13,6 +13,6 @@ public class CreateOffersServiceImpl implements CreateOffersService {
 
     @Override
     public CreateOffersOutput createOffers(CreateOffersInput input) {
-        return new CreateOffersOutput("offers created");
+        return new CreateOffersOutput("Offers were created");
     }
 }

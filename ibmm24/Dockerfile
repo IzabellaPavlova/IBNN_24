@@ -1,26 +1,14 @@
-# Stage 1: Build the application
-FROM maven:3.9.4-eclipse-temurin-21 AS build
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the Maven project files
-COPY pom.xml .
-COPY src ./src
-
-# Package the application (skip tests for faster builds in CI/CD pipelines if necessary)
-RUN mvn package -DskipTests
-
-# Stage 2: Create a minimal runtime image
+# Use an official OpenJDK runtime as a parent image
 FROM openjdk:21-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the packaged JAR from the build stage
-COPY --from=build /app/target/*.jar app.jar
+# Copy the Maven-built application jar file from the target directory
+# (Assumes the final jar is named based on your project artifactId and version in pom.xml)
+COPY target/*.jar app.jar
 
-# Expose the application port
+# Expose the application port (e.g., 8080 for Spring Boot)
 EXPOSE 8080
 
 # Run the application
