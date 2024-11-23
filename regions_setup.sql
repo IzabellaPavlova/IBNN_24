@@ -14,11 +14,12 @@ CREATE TABLE regions (
 
 -- Create offers table
 CREATE TABLE Offers (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     most_specific_region SERIAL NOT NULL REFERENCES Regions(id) ON DELETE CASCADE,
     data VARCHAR(255) NOT NULL,
     start_date BIGINT NOT NULL,
     end_date BIGINT NOT NULL,
+    full_days INT NOT NULL,
     number_seats INT NOT NULL,
     price INT NOT NULL,
     car_type VARCHAR(255) NOT NULL,
