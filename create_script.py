@@ -38,12 +38,12 @@ CREATE TABLE regions (
 -- Create offers table
 CREATE TABLE Offers (
     id SERIAL PRIMARY KEY,
-    most_specific_region_path LTREE NOT NULL REFERENCES Regions(path) ON DELETE CASCADE,
-    data JSONB NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
+    most_specific_region SERIAL NOT NULL REFERENCES Regions(id) ON DELETE CASCADE,
+    data VARCHAR(255) NOT NULL,
+    start_date BIGINT NOT NULL,
+    end_date BIGINT NOT NULL,
     number_seats INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
+    price INT NOT NULL,
     car_type VARCHAR(255) NOT NULL,
     has_vollkasko BOOLEAN NOT NULL,
     free_kilometers INT NOT NULL
@@ -52,7 +52,7 @@ CREATE TABLE Offers (
 -- Create indexes
 CREATE INDEX path_gist_idx ON regions USING GIST (path);
 CREATE INDEX path_btree_idx ON regions USING BTREE (path);
-CREATE INDEX subregion_idx ON offers(most_specific_region_path);
+CREATE INDEX subregion_idx ON offers(most_specific_region);
 
 -- Insert data
 """
