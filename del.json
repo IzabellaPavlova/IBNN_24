@@ -1,90 +1,85 @@
 {
-    "offers": [
-        {
-            "ID": "99934a57-7988-7879-bb9b-e03bd4e77b9a",
-            "data": "high-performance sports car"
+    "requestType": "READ",
+    "timestamp": "1732412045610530000",
+    "log": {
+        "id": "4ab5c240-cac9-46fb-a405-eacd29ab76a9",
+        "start_time": "2024-11-24T01:34:05.61053Z",
+        "duration": 206.236,
+        "expected_result": {
+            "Offers": [
+                {
+                    "OfferID": "e3600d7b-c3cb-4c13-9be6-1144dabde290",
+                    "IsDataCorrect": true
+                }
+            ],
+            "CarTypeCounts": {
+                "family": 0,
+                "luxury": 0,
+                "small": 0,
+                "sports": 1
+            },
+            "FreeKilometerRanges": [
+                {
+                    "Start": 800,
+                    "End": 850,
+                    "Count": 1
+                }
+            ],
+            "PriceRanges": [
+                {
+                    "Start": 7110,
+                    "End": 7120,
+                    "Count": 1
+                }
+            ],
+            "SeatsCounts": {
+                "6": 1
+            },
+            "VollkaskoCount": {
+                "TrueCount": 1,
+                "FalseCount": 0
+            }
         },
-        {
-            "ID": "cc934a57-7988-7879-bb9b-e03bd4e77b9d",
-            "data": "spacious luxury SUV"
+        "actual_result": {
+            "Offers": [
+                {
+                    "OfferID": "e3600d7b-c3cb-4c13-9be6-1144dabde290",
+                    "IsDataCorrect": true
+                }
+            ],
+            "CarTypeCounts": {
+                "family": 0,
+                "luxury": 0,
+                "small": 0,
+                "sports": 0
+            },
+            "FreeKilometerRanges": [],
+            "PriceRanges": [],
+            "SeatsCounts": {},
+            "VollkaskoCount": {
+                "TrueCount": 0,
+                "FalseCount": 0
+            }
         },
-        {
-            "ID": "bb934a57-7988-7879-bb9b-e03bd4e77b9c",
-            "data": "pickup truck for heavy-duty needs"
-        },
-        {
-            "ID": "77934a57-7988-7879-bb9b-e03bd4e77b9e",
-            "data": "luxury sedan with premium features"
-        },
-        {
-            "ID": "88934a57-7988-7879-bb9b-e03bd4e77b9f",
-            "data": "family SUV with safety features"
-        },
-        {
-            "ID": "66934a57-7988-7879-bb9b-e03bd4e77b9d",
-            "data": "sporty coupe, for the adventurous driver"
+        "search_config": {
+            "ID": "4ab5c240-cac9-46fb-a405-eacd29ab76a9",
+            "RegionID": 0,
+            "StartRange": "2023-07-31T00:00:00Z",
+            "EndRange": "2023-08-03T00:00:00Z",
+            "NumberDays": 3,
+            "CarType": null,
+            "OnlyVollkasko": null,
+            "MinFreeKilometer": null,
+            "MinNumberSeats": null,
+            "MinPrice": null,
+            "MaxPrice": null,
+            "Pagination": {
+                "Page": 0,
+                "PageSize": 100
+            },
+            "Order": "price-asc",
+            "PriceBucketWidth": 10,
+            "FreeKmBucketWidth": 50
         }
-    ],
-    "priceRanges": [
-        {
-            "start": 10000,
-            "end": 20000,
-            "count": 2
-        },
-        {
-            "start": 20000,
-            "end": 30000,
-            "count": 3
-        },
-        {
-            "start": 30000,
-            "end": 40000,
-            "count": 1
-        }
-    ],
-    "carTypeCounts": {
-        "family": 1,
-        "luxury": 2,
-        "sports": 3
-    },
-    "seatsCount": [
-        {
-            "numberSeats": 2,
-            "count": 3
-        },
-        {
-            "numberSeats": 5,
-            "count": 1
-        },
-        {
-            "numberSeats": 7,
-            "count": 2
-        }
-    ],
-    "freeKilometerRange": [
-        {
-            "start": 100,
-            "end": 150,
-            "count": 1
-        },
-        {
-            "start": 150,
-            "end": 200,
-            "count": 2
-        },
-        {
-            "start": 200,
-            "end": 250,
-            "count": 2
-        },
-        {
-            "start": 300,
-            "end": 350,
-            "count": 1
-        }
-    ],
-    "vollkaskoCount": {
-        "trueCount": 6,
-        "falseCount": 3
     }
 }

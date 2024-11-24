@@ -1,0 +1,35 @@
+{
+    "offers": [
+        {
+            "ID": "e3600d7b-c3cb-4c13-9be6-1144dabde290",
+            "data": "sports car"
+        }
+    ],
+    "carTypeCounts": {
+        "family": 0,
+        "luxury": 0,
+        "small": 0,
+        "sports": 1
+    },
+    "freeKilometerRange": [
+        {
+            "start": 800,
+            "end": 850,
+            "count": 1
+        }
+    ],
+    "priceRanges": [
+        {
+            "start": 7110,
+            "end": 7120,
+            "count": 1
+        }
+    ],
+    "seatsCounts": {
+        "6": 1
+    },
+    "vollkaskoCount": {
+        "trueCount": 1,
+        "falseCount": 0
+    }
+}

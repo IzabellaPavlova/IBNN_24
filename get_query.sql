@@ -66,23 +66,9 @@ filtered_offers_for_car_type AS (
     AND ($14 IS NULL OR (CASE WHEN $14 THEN has_vollkasko ELSE TRUE END))
     AND ($15 IS NULL OR free_kilometers >= $15)
 ),
--- Price range aggregation
-price_ranges AS (
-    SELECT
-        floor(price::numeric / $8) AS bucket,
-        COUNT(*) AS count
-    FROM filtered_offers_all
-    GROUP BY floor(price::numeric / $8)
-    HAVING COUNT(*) > 0
-),
 -- Car type counts (excluding car type filter)
-car_type_counts AS (
-    SELECT
-        car_type,
-        COUNT(*) AS count
-    FROM filtered_offers_for_car_type
-    GROUP BY car_type
-    HAVING COUNT(*) > 0
+car_type_counts AS (select t.car_type, COALESCE(c.count, 0) as count FROM (VALUES ('family'), ('luxury'), ('small'), ('sports')) AS t(car_type)
+LEFT JOIN (select car_type, COUNT(*) AS count FROM filtered_offers_for_car_type GROUP BY car_type) c USING (car_type)
 ),
 -- Seats count (excluding seats filter)
 seats_count AS (
@@ -91,6 +77,15 @@ seats_count AS (
         COUNT(*) AS count
     FROM filtered_offers_for_seats
     GROUP BY number_seats
+    HAVING COUNT(*) > 0
+),
+-- Price range aggregation
+price_ranges AS (
+    SELECT
+        floor(price::numeric / $8) AS bucket,
+        COUNT(*) AS count
+    FROM filtered_offers_all
+    GROUP BY floor(price::numeric / $8)
     HAVING COUNT(*) > 0
 ),
 -- Free kilometer ranges
@@ -148,15 +143,10 @@ SELECT json_build_object(
             ORDER BY car_type
         ) t
     ),
-    'seatsCount', (
-        SELECT json_agg(json_build_object(
-            'numberSeats', number_seats,
-            'count', count
-        ))
+    'seatsCounts', (
+        SELECT json_object_agg(number_seats::text, count)
         FROM (
-            SELECT number_seats, count
-            FROM seats_count
-            ORDER BY number_seats
+            SELECT number_seats, count FROM seats_count ORDER BY number_seats
         ) t
     ),
     'freeKilometerRange', (
@@ -172,10 +162,9 @@ SELECT json_build_object(
     ),
     'vollkaskoCount', (
         SELECT json_build_object(
-            'trueCount', true_count,
-            'falseCount', false_count
+            'trueCount', coalesce(true_count, 0),
+            'falseCount', coalesce(false_count, 0)
         )
         FROM vollkasko_counts
-        WHERE true_count IS NOT NULL OR false_count IS NOT NULL
     )
 ) AS result;
