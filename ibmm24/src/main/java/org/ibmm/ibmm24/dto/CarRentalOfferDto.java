@@ -1,7 +1,5 @@
 package org.ibmm.ibmm24.dto;
 
-import java.time.ZonedDateTime;
-
 public record CarRentalOfferDto(
         String ID,
         String data,

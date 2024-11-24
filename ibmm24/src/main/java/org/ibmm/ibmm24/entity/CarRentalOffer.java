@@ -20,7 +20,7 @@ public class CarRentalOffer {
     @Column(name = "most_specific_region", nullable = false)
     private int mostSpecificRegion;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String data;
 
     @Column(name = "start_date", nullable = false)
