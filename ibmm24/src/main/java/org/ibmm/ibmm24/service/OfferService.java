@@ -201,9 +201,8 @@ public class OfferService {
                 ") t" +
                 "), " +
                 "'vollkaskoCount', (" +
-                "SELECT json_build_object('trueCount', true_count, 'falseCount', false_count) " +
+                "SELECT json_build_object('trueCount', coalesce(true_count, 0), 'falseCount', coalesce(false_count, 0) " +
                 "FROM vollkasko_counts " +
-                "WHERE true_count IS NOT NULL OR false_count IS NOT NULL" +
                 ")" +
                 ") AS result";
 
