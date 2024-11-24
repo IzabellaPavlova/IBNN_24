@@ -28,19 +28,8 @@ public class EngineApiController {
     @Autowired
     CreateOffersService createOffersService;
 
-//    @Autowired
-//    OfferService offerService;
-
     @Autowired
     EngineLogicService engineLogicService;
-    private String someParam;
-
-    // @GetMapping("/api/offers")
-    // ResponseEntity<OfferQueryOutput> readOffers(@Valid @ModelAttribute OfferQueryInput input) {
-    //     log.info(input.toString());
-    //     OfferQueryOutput output = engineLogicService.filterAndAggregateOrders(input);
-    //     return new ResponseEntity<>(output, HttpStatus.OK);
-    // }
 
     @GetMapping("/api/offers")
     ResponseEntity<OfferQueryOutput> readOffers(
@@ -60,40 +49,22 @@ public class EngineApiController {
         @RequestParam(value = "onlyVollkasko", required = false) Boolean onlyVollkasko,
         @RequestParam(value = "minFreeKilometers", required = false) Integer minFreeKilometers
     ) {
-//        OfferQueryInput input = new OfferQueryInput();
-//        input.setRegionID(regionID);
-//        input.setTimeRangeStart(timeRangeStart);
-//        input.setTimeRangeEnd(timeRangeEnd);
-//        input.setNumberDays(numberDays);
-//        input.setSortOrder(sortOrder);
-//        input.setPage(page);
-//        input.setPageSize(pageSize);
-//        input.setPriceRangeWidth(priceRangeWidth);
-//        input.setMinFreeKilometerWidth(minFreeKilometerWidth);
-//        input.setMinNumberSeats(minNumberSeats);
-//        input.setMinPrice(minPrice);
-//        input.setMaxPrice(maxPrice);
-//        input.setCarType(carType);
-//        input.setOnlyVollkasko(onlyVollkasko);
-//        String json = offerService.getOffers(
-//                regionID,
-//                timeRangeStart.intValue(),
-//                timeRangeEnd.intValue(),
-//                numberDays,
-//                sortOrder,
-//                pageSize.intValue(),
-//                page.intValue(),
-//                priceRangeWidth.intValue(),
-//                minFreeKilometerWidth.intValue(),
-//                minNumberSeats,
-//                minPrice,
-//                maxPrice,
-//                carType,
-//                onlyVollkasko,
-//                minFreeKilometers
-//        );
-        // log.info(input.toString());
-//        OfferQueryOutput output = engineLogicService.filterAndAggregateOrders(input);
+        OfferQueryInput input = new OfferQueryInput();
+        input.setRegionID(regionID);
+        input.setTimeRangeStart(timeRangeStart);
+        input.setTimeRangeEnd(timeRangeEnd);
+        input.setNumberDays(numberDays);
+        input.setSortOrder(sortOrder);
+        input.setPage(page);
+        input.setPageSize(pageSize);
+        input.setPriceRangeWidth(priceRangeWidth);
+        input.setMinFreeKilometerWidth(minFreeKilometerWidth);
+        input.setMinNumberSeats(minNumberSeats);
+        input.setMinPrice(minPrice);
+        input.setMaxPrice(maxPrice);
+        input.setCarType(carType);
+        input.setOnlyVollkasko(onlyVollkasko);
+        log.info(input.toString());
         OfferQueryOutput output = new OfferQueryOutput();
         List<CarRentalOfferDto> offers = engineLogicService.mandatoryFilters(
                 regionID, timeRangeStart, timeRangeEnd, numberDays, sortOrder
@@ -102,20 +73,9 @@ public class EngineApiController {
         return new ResponseEntity<>(output, HttpStatus.OK);
     }
 
-//    @GetMapping("/api/offers")
-//    public String getOffers(@RequestParam(required = false) String someParam, HttpServletRequest request) {
-//        this.someParam = someParam;
-//        // Print the query string to the logs
-//        String queryString = request.getQueryString();
-//        System.out.println("Query String: " + queryString);
-//
-//        // Your business logic here
-//        return "Query received: " + queryString;
-//    }
-
     @PostMapping("/api/offers")
     ResponseEntity<CreateOffersOutput> createOffers(@RequestBody CreateOffersInput input) {
-        engineLogicService.createOffers(input.getOffers());
+         engineLogicService.createOffers(input.getOffers());
         return new ResponseEntity<>(createOffersService.createOffers(input), HttpStatus.OK);
     }
     @DeleteMapping("/api/offers")
