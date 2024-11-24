@@ -17,9 +17,8 @@ public class CarRentalOffer {
     @Id
     private UUID id; // Corresponds to the UUID primary key
 
-    @ManyToOne
-    @JoinColumn(name = "most_specific_region", nullable = false)
-    private Region mostSpecificRegion;
+    @Column(name = "most_specific_region", nullable = false)
+    private int mostSpecificRegion;
 
     @Column(nullable = false, length = 255)
     private String data;

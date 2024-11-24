@@ -9,6 +9,16 @@ import java.util.List;
 public interface EngineLogicService {
     OfferQueryOutput filterAndAggregateOrders(OfferQueryInput input);
 
+    List<CarRentalOfferDto> mandatoryFilters();
+
+    List<CarRentalOfferDto> mandatoryFilters(
+            Integer regionID,
+            Long timeRangeStart,
+            Long timeRangeEnd,
+            Integer numberDays,
+            String sortOrder
+    );
+
     void cleanup();
 
     void createOffers(List<CarRentalOfferDto> orders);

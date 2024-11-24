@@ -11,6 +11,17 @@ public interface CarRentalOfferRepository {
             long timeRangeStart,
             long timeRangeEnd,
             int numberDays,
+            String sortOrder,
+            int minNumberSeats,
+            String carType,
+            Boolean onlyVollkasko
+    );
+
+    List<CarRentalOfferDto> filterOffers(
+            int regionId,
+            long timeRangeStart,
+            long timeRangeEnd,
+            int numberDays,
             int minPrice,
             int maxPrice,
             int minNumberSeats,

@@ -20,23 +20,15 @@ public interface CarRentalOfferJpaRepository extends JpaRepository<CarRentalOffe
     void deleteAllOffers();
 
     // Custom query to filter offers based on multiple parameters
-    @Query("SELECT o FROM CarRentalOffer o WHERE o.mostSpecificRegion.id = :regionId " +
+    @Query("SELECT o FROM CarRentalOffer o WHERE o.mostSpecificRegion IN :leaves " +
             "AND o.startDate >= :timeRangeStart " +
             "AND o.endDate <= :timeRangeEnd " +
-            "AND o.fullDays >= :numberDays " +
-            "AND o.price >= :minPrice AND o.price < :maxPrice " +
-            "AND o.numberSeats >= :minNumberSeats " +
-            "AND (o.carType = :carType OR :carType IS NULL) " +
-            "AND (o.hasVollkasko = :onlyVollkasko OR :onlyVollkasko IS NULL) " +
-            "ORDER BY o.price ASC")
+            "AND o.fullDays >= :numberDays ")
     List<CarRentalOffer> findOffersByFilters(
-            @Param("regionId") int regionId,
+            @Param("leaves") List<Integer> leaves,
             @Param("timeRangeStart") long timeRangeStart,
             @Param("timeRangeEnd") long timeRangeEnd,
             @Param("numberDays") int numberDays,
-            @Param("minPrice") int minPrice,
-            @Param("maxPrice") int maxPrice,
-            @Param("minNumberSeats") int minNumberSeats,
-            @Param("carType") String carType,
-            @Param("onlyVollkasko") Boolean onlyVollkasko);
+            @Param("order") String order
+            );
 }
