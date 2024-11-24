@@ -43,4 +43,5 @@ Compare ´del.json´ (test server logs) with ´res.json´ (local sql query run r
 
 ## Links
 [Challenge documentation - HackaTUM](https://hackatum.check24.de/docs/main-challenge/introduction)
+
 [DevPost Submission](https://devpost.com/software/name-58ypau)
